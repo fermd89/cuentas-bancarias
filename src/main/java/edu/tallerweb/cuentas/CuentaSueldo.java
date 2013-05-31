@@ -33,7 +33,7 @@ public class CuentaSueldo extends AbstractCuenta {
 	 * @return el saldo de la cuenta
 	 */
 	public Double getSaldo() {
-		
+
 		return this.getMonto();
 	}
 

@@ -106,7 +106,7 @@ public class CuentaTests {
 		
 		Assert.assertEquals(
 				"al extraer un monto mayor al que se deposito se descuenta dinero del monto descubierto",
-				50.0, cuenta.getDescubierto(), 0.0);
+				47.5, cuenta.getDescubierto(), 0.0);
 		
 		Assert.assertEquals(
 				"el monto de la cuenta queda en 0",

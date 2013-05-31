@@ -60,7 +60,7 @@ public class CuentaCorriente extends AbstractCuenta {
 			montoAExtraer -= this.monto;
 			this.monto = 0;
 			
-			this.montoDescubierto -= montoAExtraer;
+			this.montoDescubierto -= montoAExtraer + montoAExtraer * 0.05;
 			
 		} else {
 			this._extraer(montoAExtraer);
