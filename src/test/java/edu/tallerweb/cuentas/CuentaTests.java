@@ -52,6 +52,50 @@ public class CuentaTests {
 				1994.0, cuenta.getSaldo(), 0.0);
 	}
 	
+	@Test(expected=CuentaBancariaException.class)	
+	public void cajaDeAhorroError() {
+
+		CajaAhorros cuenta = new CajaAhorros();
+		cuenta.depositar(3500.0);
+
+		cuenta.extraer(4000.0);
+	}
+	
+	@Test(expected=CuentaBancariaException.class)	
+	public void cuentaCorrienteError() {
+
+		CuentaCorriente cuenta = new CuentaCorriente(100.0);
+		cuenta.depositar(3500.0);
+
+		cuenta.extraer(4000.0);
+	}
+	
+	@Test	
+	public void cajaAhorrosOk() {
+
+		CajaAhorros cuenta = new CajaAhorros();
+		cuenta.depositar(100.0);
+
+		cuenta.extraer(100.0);
+		
+		Assert.assertEquals(
+				"extraccion ok",
+				0.0, cuenta.getSaldo(), 0.0);
+	}
+	
+	@Test	
+	public void cuentaCorrienteOk() {
+
+		CuentaCorriente cuenta = new CuentaCorriente(100.0);
+		cuenta.depositar(100.0);
+
+		cuenta.extraer(100.0);
+		
+		Assert.assertEquals(
+				"extraccion ok",
+				0.0, cuenta.getSaldo(), 0.0);
+	}
+	
 	@Test
 	public void cuentaCorriente() {
 		
