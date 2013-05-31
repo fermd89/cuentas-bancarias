@@ -16,15 +16,17 @@ package edu.tallerweb.cuentas;
  * Pasaremos a deberle al banco $ 105 en total: los $ 100 que
  * nos cubrió, más el 5% adicional sobre el descubierto otorgado.
  */
-public class CuentaCorriente {
-
+public class CuentaCorriente extends AbstractCuenta {
+	
+	private double montoDescubierto;
 	/**
 	 * Toda cuenta corriente se inicia con un límite total
 	 * para el descubierto.
 	 * @param descubiertoTotal
 	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
-		throw new RuntimeException("No implementado aún");
+			
+		this.montoDescubierto = descubiertoTotal;
 	}
 	
 	/**
@@ -34,7 +36,8 @@ public class CuentaCorriente {
 	 * @param monto a depositar
 	 */
 	public void depositar(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		
+		this._depositar(monto);
 	}
 
 	/**
@@ -45,7 +48,23 @@ public class CuentaCorriente {
 	 * @param monto a extraer
 	 */
 	public void extraer(final Double monto) {
-		throw new RuntimeException("No implementado aún");
+		
+		double montoTotal = this.montoDescubierto + this.monto;
+		double montoAExtraer = monto;
+		
+		if (montoTotal - montoAExtraer < 0) {
+			throw new CuentaBancariaException("No hay suficiente monto para realizar la extraccion");
+		}
+		
+		if (montoAExtraer > this.monto) {
+			montoAExtraer -= this.monto;
+			this.monto = 0;
+			
+			this.montoDescubierto -= montoAExtraer;
+			
+		} else {
+			this._extraer(montoAExtraer);
+		}
 	}
 
 	/**
@@ -53,7 +72,8 @@ public class CuentaCorriente {
 	 * @return el saldo de la cuenta
 	 */
 	public Double getSaldo() {
-		throw new RuntimeException("No implementado aún");
+		
+		return this.getMonto();
 	}
 	
 	/**
@@ -61,7 +81,8 @@ public class CuentaCorriente {
 	 * @return el descubierto de la cuenta
 	 */
 	public Double getDescubierto() {
-		throw new RuntimeException("No implementado aún");
+		
+		return this.montoDescubierto;
 	}
 
 }

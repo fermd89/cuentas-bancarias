@@ -28,5 +28,45 @@ public class CuentaTests {
 
 		cuenta.extraer(4000.0);
 	}
+	
+	@Test
+	public void cajaDeAhorros() {
+		
+		CajaAhorros cuenta = new CajaAhorros();
+		cuenta.depositar(5000.0);
+
+		cuenta.extraer(500.0);
+		cuenta.extraer(500.0);
+		cuenta.extraer(500.0);
+		cuenta.extraer(500.0);
+		cuenta.extraer(500.0);
+		
+		Assert.assertEquals(
+				"al extraer $ 2500.0 en Caja de Ahorro, tiene $ 2500.0",
+				2500.0, cuenta.getSaldo(), 0.0);
+		
+		cuenta.extraer(500.0);
+		
+		Assert.assertEquals(
+				"al extraer por 6ta vez se cobra 6$ de comision",
+				1994.0, cuenta.getSaldo(), 0.0);
+	}
+	
+	@Test
+	public void cuentaCorriente() {
+		
+		CuentaCorriente cuenta = new CuentaCorriente(100.0);
+		cuenta.depositar(100.0);
+
+		cuenta.extraer(150.0);		
+		
+		Assert.assertEquals(
+				"al extraer un monto mayor al que se deposito se descuenta dinero del monto descubierto",
+				50.0, cuenta.getDescubierto(), 0.0);
+		
+		Assert.assertEquals(
+				"el monto de la cuenta queda en 0",
+				0.0, cuenta.getSaldo(), 0.0);
+	}
 
 }
